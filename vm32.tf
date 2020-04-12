@@ -1,33 +1,32 @@
-resource "azurerm_public_ip" "vm32" {
-  name                = "vm32"
+resource "azurerm_public_ip" "lab_vm32" {
+  name                = "lab_vm32"
   location            = azurerm_resource_group.lab.location
   resource_group_name = azurerm_resource_group.lab.name
   allocation_method   = "Static"
 }
 
-output "vm32_public_ip" {
-  value = azurerm_public_ip.vm32.ip_address
+output "lab_vm32_public_ip" {
+  value = azurerm_public_ip.lab_vm32.ip_address
 }
 
-resource "azurerm_network_interface" "vm32" {
-  name                = "vm32"
+resource "azurerm_network_interface" "lab_vm32" {
+  name                = "lab_vm32"
   location            = azurerm_resource_group.lab.location
   resource_group_name = azurerm_resource_group.lab.name
 
   ip_configuration {
-    name                          = "vm32"
+    name                          = "lab_vm32"
     subnet_id                     = azurerm_subnet.servers.id
-    private_ip_address_allocation = "Static"
-    private_ip_address            = cidrhost(azurerm_subnet.servers.address_prefix, 32)
-    public_ip_address_id          = azurerm_public_ip.vm32.id
+    private_ip_address_allocation = "Dynamic"
+    public_ip_address_id = azurerm_public_ip.lab_vm32.id
   }
 }
 
-resource "azurerm_virtual_machine" "vm32" {
-  name                  = "vm32"
+resource "azurerm_virtual_machine" "lab_vm32" {
+  name                  = "lab_vm32"
   location              = azurerm_resource_group.lab.location
   resource_group_name   = azurerm_resource_group.lab.name
-  network_interface_ids = [azurerm_network_interface.vm32.id]
+  network_interface_ids = [azurerm_network_interface.lab_vm32.id]
   vm_size               = "Standard_A2_v2"
 
   delete_os_disk_on_termination    = true
@@ -40,21 +39,21 @@ resource "azurerm_virtual_machine" "vm32" {
     version   = "latest"
   }
   storage_os_disk {
-    name              = "vm32_os"
+    name              = "lab_vm32"
     caching           = "ReadWrite"
     create_option     = "FromImage"
     managed_disk_type = "Standard_LRS"
   }
   os_profile {
-    computer_name  = "lab-vm32"
-    admin_username = "labadmin"
+    computer_name  = replace("lab_vm32", "_", "-")
+    admin_username = local.admin_user
     custom_data    = file("cloudconfig_ubuntu.yml")
   }
   os_profile_linux_config {
     disable_password_authentication = true
     ssh_keys {
-      path     = "/home/labadmin/.ssh/authorized_keys"
-      key_data = "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAsQet7FpUFuBylm+JrVxhYkQJlUyeuvxHVLEa3cn37CarrhGmhthr5lSE/2QZnICQ1v+9K1pkznHPJoWhQbFBU4CQ1WzBvcSWjzoPeSgMZm+NT6G+TxK+KuINfVKP5PwxkWYRBBkjTDn404HZYeg4eKo0/j1xQ4JwZIVoqyER/qY/Ipj22ANvnXBVP+vFXXwurb9TnsLnzfc+/eckl7+axtdNTl04npOvo5cZ2RN+g9rth8AZY3pPYq5sjjHyBYssnzyNgri4keXC8Req8XyabfaO6hZ9qrbUjXjCc6OG6AAYk8LxCwI99QAHtWUfd8XblF08vjj+2hMDlxSMKiPEVw== "
+      path     = local.admin_path
+      key_data = local.admin_key_data
     }
   }
 }
