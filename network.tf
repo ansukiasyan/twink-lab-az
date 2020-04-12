@@ -1,7 +1,7 @@
 resource "azurerm_network_security_group" "servers" {
   name                = "servers"
-  location            = azurerm_resource_group.prod.location
-  resource_group_name = azurerm_resource_group.prod.name
+  location            = azurerm_resource_group.lab.location
+  resource_group_name = azurerm_resource_group.lab.name
 
   security_rule {
     name                       = "ICMP_ANY"
@@ -39,18 +39,18 @@ resource "azurerm_network_security_group" "servers" {
   }
 }
 
-resource "azurerm_virtual_network" "prod" {
-  name                = "prod"
-  location            = azurerm_resource_group.prod.location
-  resource_group_name = azurerm_resource_group.prod.name
+resource "azurerm_virtual_network" "lab" {
+  name                = "lab"
+  location            = azurerm_resource_group.lab.location
+  resource_group_name = azurerm_resource_group.lab.name
   address_space       = ["10.81.0.0/16"]
 }
 
 resource "azurerm_subnet" "servers" {
   name                 = "servers"
-  resource_group_name  = azurerm_resource_group.prod.name
-  virtual_network_name = azurerm_virtual_network.prod.name
-  address_prefix       = cidrsubnet(azurerm_virtual_network.prod.address_space[0], 8, 10)
+  resource_group_name  = azurerm_resource_group.lab.name
+  virtual_network_name = azurerm_virtual_network.lab.name
+  address_prefix       = cidrsubnet(azurerm_virtual_network.lab.address_space[0], 8, 10)
 }
 
 resource "azurerm_subnet_network_security_group_association" "servers" {
