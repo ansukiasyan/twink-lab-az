@@ -1,0 +1,7 @@
+
+data "terraform_remote_state" "common" {
+  backend = "local"
+  config = {
+    path = "../twink-common/terraform.tfstate"
+  }
+}
