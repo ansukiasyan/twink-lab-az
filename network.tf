@@ -1,5 +1,5 @@
-resource "azurerm_network_security_group" "servers" {
-  name                = "servers"
+resource "azurerm_network_security_group" "srv" {
+  name                = "srv"
   location            = azurerm_resource_group.lab.location
   resource_group_name = azurerm_resource_group.lab.name
 
@@ -46,15 +46,15 @@ resource "azurerm_virtual_network" "lab" {
   address_space       = ["10.81.0.0/16"]
 }
 
-resource "azurerm_subnet" "servers" {
-  name                 = "servers"
+resource "azurerm_subnet" "srv" {
+  name                 = "srv"
   resource_group_name  = azurerm_resource_group.lab.name
   virtual_network_name = azurerm_virtual_network.lab.name
   address_prefix       = cidrsubnet(azurerm_virtual_network.lab.address_space[0], 8, 10)
 }
 
-resource "azurerm_subnet_network_security_group_association" "servers" {
-  subnet_id                 = azurerm_subnet.servers.id
-  network_security_group_id = azurerm_network_security_group.servers.id
+resource "azurerm_subnet_network_security_group_association" "srv" {
+  subnet_id                 = azurerm_subnet.srv.id
+  network_security_group_id = azurerm_network_security_group.srv.id
 }
 

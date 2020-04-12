@@ -16,7 +16,7 @@ resource "azurerm_network_interface" "lab_vm31" {
 
   ip_configuration {
     name                          = "lab_vm31"
-    subnet_id                     = azurerm_subnet.servers.id
+    subnet_id                     = azurerm_subnet.srv.id
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id = azurerm_public_ip.lab_vm31.id
   }
