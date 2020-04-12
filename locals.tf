@@ -1,5 +1,5 @@
 locals {
-  rsgrp_name     = "twink-lab"
-  rsgrp_location = "westeurope"
+  resource_group_name     = "twink-lab"
+  resource_group_location = "westeurope"
 }
 

@@ -8,7 +8,7 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "lab" {
-  name     = local.rsgrp_name
-  location = local.rsgrp_location
+  name     = local.resource_group_name
+  location = local.resource_group_location
 }
 
