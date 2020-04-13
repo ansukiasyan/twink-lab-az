@@ -20,7 +20,7 @@ systemctl disable NetworkManager
 yum clean all
 
 # Update CentOS
-#yum update -y
+yum update -y
 
 # Install some CentOS packages
 yum install mc -y

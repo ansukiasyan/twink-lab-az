@@ -57,3 +57,21 @@ resource "azurerm_virtual_machine" "srv_vm21" {
   }
 }
 
+resource "azurerm_virtual_machine_extension" "srv_vm21" {
+  name                 = "srv_vm21"
+  virtual_machine_id   = azurerm_virtual_machine.srv_vm21.id
+  publisher            = "Microsoft.Azure.Extensions"
+  type                 = "CustomScript"
+  type_handler_version = "2.0"
+
+  settings = <<POSTINSTALL
+    {
+	    "fileUris": [
+	    "https://github.com/arabadj/twink-lab-az/raw/master/shellconfig/centos_base.sh"
+	    ],
+	    "commandToExecute": "sh centos_base.sh"
+
+    }
+POSTINSTALL
+}
+

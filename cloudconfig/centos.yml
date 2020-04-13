@@ -7,7 +7,7 @@ packages:
   - docker.io
 
 users:
-  - name: lab-admin
+  - name: arabadj
     passwd: $6$rounds=4096$WZvgYJGTHhafCI$kunX9TJ82uu9gy6izBcD/cBy5IKM33IRpxHOhXtf9fb78So.SFN679XGU9Tmuq75vK0nSOUsbKusQPsZiUG6q.
     ssh-authorized-keys:
       - ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAsQet7FpUFuBylm+JrVxhYkQJlUyeuvxHVLEa3cn37CarrhGmhthr5lSE/2QZnICQ1v+9K1pkznHPJoWhQbFBU4CQ1WzBvcSWjzoPeSgMZm+NT6G+TxK+KuINfVKP5PwxkWYRBBkjTDn404HZYeg4eKo0/j1xQ4JwZIVoqyER/qY/Ipj22ANvnXBVP+vFXXwurb9TnsLnzfc+/eckl7+axtdNTl04npOvo5cZ2RN+g9rth8AZY3pPYq5sjjHyBYssnzyNgri4keXC8Req8XyabfaO6hZ9qrbUjXjCc6OG6AAYk8LxCwI99QAHtWUfd8XblF08vjj+2hMDlxSMKiPEVw== 
