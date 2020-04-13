@@ -30,6 +30,7 @@ cd /
 wget https://github.com/arabadj/twink-lab-az/raw/master/shellconfig/centos_files/base.tar.gz
 tar -zxvf base.tar.gz
 systemctl restart sshd
+rm -f base.tar.gz
 
 # Install EPEL repository
 yum install epel-release -y
