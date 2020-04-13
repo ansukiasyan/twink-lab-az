@@ -40,4 +40,7 @@ yum install htop -y
 yum install iftop -y
 yum install nmon -y
 
+# Reboot SentOS
+init 6
+
 #
