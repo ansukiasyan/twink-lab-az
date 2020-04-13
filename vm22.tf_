@@ -47,7 +47,7 @@ resource "azurerm_virtual_machine" "lab_vm22" {
   os_profile {
     computer_name  = replace("lab_vm22", "_", "-")
     admin_username = local.admin_user
-    custom_data    = file("cloudconfig_centos.yml")
+    custom_data    = file("cloudconfig/centos.yml")
   }
   os_profile_linux_config {
     disable_password_authentication = true

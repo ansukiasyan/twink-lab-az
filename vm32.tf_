@@ -47,7 +47,7 @@ resource "azurerm_virtual_machine" "lab_vm32" {
   os_profile {
     computer_name  = replace("lab_vm32", "_", "-")
     admin_username = local.admin_user
-    custom_data    = file("cloudconfig_ubuntu.yml")
+    custom_data    = file("cloudconfig/ubuntu.yml")
   }
   os_profile_linux_config {
     disable_password_authentication = true
