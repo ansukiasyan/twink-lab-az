@@ -4,7 +4,6 @@ package_upgrade: true
 
 packages:
   - mc
-  - docker.io
 
 users:
   - name: arabadj

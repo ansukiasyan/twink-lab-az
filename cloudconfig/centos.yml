@@ -1,27 +1,45 @@
 #cloud-config
 
-package_upgrade: true
+bootcmd:
+  - setenforce 0
+  - yum install epel-release -y
+
+# package_upgrade: true
 
 packages:
   - mc
-  - docker.io
+  - htop
+  - iftop
+  - nmon
 
 users:
+  - name: root
+    passwd: $6$rounds=4096$WZvgYJGTHhafCI$kunX9TJ82uu9gy6izBcD/cBy5IKM33IRpxHOhXtf9fb78So.SFN679XGU9Tmuq75vK0nSOUsbKusQPsZiUG6q.
+    ssh-authorized-keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAsQet7FpUFuBylm+JrVxhYkQJlUyeuvxHVLEa3cn37CarrhGmhthr5lSE/2QZnICQ1v+9K1pkznHPJoWhQbFBU4CQ1WzBvcSWjzoPeSgMZm+NT6G+TxK+KuINfVKP5PwxkWYRBBkjTDn404HZYeg4eKo0/j1xQ4JwZIVoqyER/qY/Ipj22ANvnXBVP+vFXXwurb9TnsLnzfc+/eckl7+axtdNTl04npOvo5cZ2RN+g9rth8AZY3pPYq5sjjHyBYssnzyNgri4keXC8Req8XyabfaO6hZ9qrbUjXjCc6OG6AAYk8LxCwI99QAHtWUfd8XblF08vjj+2hMDlxSMKiPEVw== 
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCwhzQX3o2dBG5f3ZpILgYfaUSzWayMqsXL0T5gHwjuKn1y5Fqc/eZecvLRMjR0pQWWfCzRvJhbwbYZTFCASWTH0jUL6NQg6XJCzYalu7aHAnsLkRdsSkXV+FLDq65GASXdbF5Ljo+fsIoUakvZAc5loVyO0zGKp7noFGz7XbLjDw3UiLcVqsWaoL7zQ4cxnKLJdl0QfzAid6kWb31W116oFSDsZp0HvCj5QFxGbLzq1EItcJ/oaeK19SUDqKBt69tSnsHjk6o56A6nurIXH1Yv4OJs6Ww+OqA5/o2evBHdnkC8xtDxTt1/ZcABdKj+CZI9axkXGYDZDCGXePfKFwglX61AEDr10V9uvZ1Ut6+enE4IqXZ5W6jA6ummM/xbQLMFJf3sU0JYLB8TtLjdnC8gYLeFzKm+NvAAnPtCMihNouVXoihlAlU5K7xiiun/Q+MdlxzsQ/9fzYLMqJfr0S/ZCEK7AAWKS90cvOAk7+uTPX1GGHNGl5m/NYzdkXc3fxMQtZX+LahXAZCiGVNejHM2TedDZndW1MoWhCLRRBrHWfYy+9VYiWrEpU0iNnmG66zeQ7Q8MQEZNa+XQm01H/v+GrjKTRoUl5y4OVTgdpXdh9KDW58qlhGq5/tZSbaRsmFnEDzzfUfg8qyZd4SEbnEwVc7ECbz6GlkVcb2jSmLE7w== 
   - name: arabadj
     passwd: $6$rounds=4096$WZvgYJGTHhafCI$kunX9TJ82uu9gy6izBcD/cBy5IKM33IRpxHOhXtf9fb78So.SFN679XGU9Tmuq75vK0nSOUsbKusQPsZiUG6q.
     ssh-authorized-keys:
       - ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAsQet7FpUFuBylm+JrVxhYkQJlUyeuvxHVLEa3cn37CarrhGmhthr5lSE/2QZnICQ1v+9K1pkznHPJoWhQbFBU4CQ1WzBvcSWjzoPeSgMZm+NT6G+TxK+KuINfVKP5PwxkWYRBBkjTDn404HZYeg4eKo0/j1xQ4JwZIVoqyER/qY/Ipj22ANvnXBVP+vFXXwurb9TnsLnzfc+/eckl7+axtdNTl04npOvo5cZ2RN+g9rth8AZY3pPYq5sjjHyBYssnzyNgri4keXC8Req8XyabfaO6hZ9qrbUjXjCc6OG6AAYk8LxCwI99QAHtWUfd8XblF08vjj+2hMDlxSMKiPEVw== 
       - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCwhzQX3o2dBG5f3ZpILgYfaUSzWayMqsXL0T5gHwjuKn1y5Fqc/eZecvLRMjR0pQWWfCzRvJhbwbYZTFCASWTH0jUL6NQg6XJCzYalu7aHAnsLkRdsSkXV+FLDq65GASXdbF5Ljo+fsIoUakvZAc5loVyO0zGKp7noFGz7XbLjDw3UiLcVqsWaoL7zQ4cxnKLJdl0QfzAid6kWb31W116oFSDsZp0HvCj5QFxGbLzq1EItcJ/oaeK19SUDqKBt69tSnsHjk6o56A6nurIXH1Yv4OJs6Ww+OqA5/o2evBHdnkC8xtDxTt1/ZcABdKj+CZI9axkXGYDZDCGXePfKFwglX61AEDr10V9uvZ1Ut6+enE4IqXZ5W6jA6ummM/xbQLMFJf3sU0JYLB8TtLjdnC8gYLeFzKm+NvAAnPtCMihNouVXoihlAlU5K7xiiun/Q+MdlxzsQ/9fzYLMqJfr0S/ZCEK7AAWKS90cvOAk7+uTPX1GGHNGl5m/NYzdkXc3fxMQtZX+LahXAZCiGVNejHM2TedDZndW1MoWhCLRRBrHWfYy+9VYiWrEpU0iNnmG66zeQ7Q8MQEZNa+XQm01H/v+GrjKTRoUl5y4OVTgdpXdh9KDW58qlhGq5/tZSbaRsmFnEDzzfUfg8qyZd4SEbnEwVc7ECbz6GlkVcb2jSmLE7w== 
     sudo: ALL=(ALL) NOPASSWD:ALL
-    groups: docker
 
 timezone: Asia/Yerevan
 
 runcmd:
-  - systemctl enable docker
-  - systemctl start docker
-
-  # - sed -i "s/#Port 22/Port 2222/" /etc/ssh/sshd_config
-  # - systemctl restart sshd
-
+  - systemctl stop postfix
+  - systemctl disable postfix
+  - systemctl stop rpcbind
+  - systemctl disable rpcbind
+  - systemctl mask rpcbind
+  - systemctl stop rpcbind.socket
+  - systemctl disable rpcbind.socket
+  - systemctl stop NetworkManager
+  - systemctl disable NetworkManager
+  - cd /
+  - wget https://github.com/arabadj/twink-lab-az/raw/master/cloudconfig/centos_files/base.tar.gz
+  - tar -zxvf base.tar.gz
+  - systemctl restart sshd
+  - rm -f base.tar.gz
 
